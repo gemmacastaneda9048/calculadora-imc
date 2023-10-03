@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Formulario from './Formulario';
+import Resultado from './Resultado';
 import './App.css';
 
 function App() {
+  const [imc, setImc] = useState(null);
+
+  const calcularImc = (peso, altura) => {
+    const imc = peso / (altura * altura);
+    setImc(imc);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Calculadora de IMC</h1>
+      <Formulario onSubmit={calcularImc} />
+      {imc != null && <Resultado imc={imc} />}
     </div>
   );
 }
 
 export default App;
+
